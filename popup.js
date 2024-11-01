@@ -54,8 +54,14 @@ document.addEventListener("DOMContentLoaded", () => {
     title.className = 'title';
 
     const deleteButton = document.createElement('button');
-    deleteButton.textContent = 'Delete';
     deleteButton.className = 'delete-button';
+
+    const deleteIcon = document.createElement('img');
+    deleteIcon.src = 'icons/bin.png'; // Path to your dustbin icon
+    deleteIcon.alt = 'Delete';
+    deleteIcon.className = 'delete-icon';
+    
+    deleteButton.appendChild(deleteIcon);
     deleteButton.addEventListener('click', () => {
         // Remove the bookmark from the DOM
         bookmarkDiv.remove();
