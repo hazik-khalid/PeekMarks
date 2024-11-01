@@ -4,8 +4,8 @@ document.addEventListener('DOMContentLoaded', ()=> {
     const saveButton = document.getElementById('save-bookmark')
 })
 
-//Load Bookmarks
-
+// Load bookmarks on popup open
+    loadBookmarks();
 
 //Save Current Page as Bookmark
 saveButton.addEventListener('click', async ()=>{

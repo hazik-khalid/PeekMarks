@@ -1,6 +1,5 @@
 
-    // Load bookmarks on popup open
-    loadBookmarks();
+
 
     // Save the current page as a bookmark with thumbnail
 
