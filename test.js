@@ -6,15 +6,7 @@
 
 
     // Function to load bookmarks from storage and display them
-    function loadBookmarks() {
-        chrome.storage.local.get(['bookmarks'], (result) => {
-            const bookmarks = result.bookmarks || [];
-            bookmarkContainer.innerHTML = '';
-            bookmarks.forEach(bookmark => displayBookmark(bookmark));
-        });
-    }
 
-    // Function to save a bookmark to local storage
 
 
     // Function to display a bookmark

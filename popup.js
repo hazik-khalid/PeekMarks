@@ -19,8 +19,12 @@ saveButton.addEventListener('click', async ()=>{
 })
 
 //Function To Load bookmarks
-function loadBookmarks(){
-
+function loadBookmarks() {
+    chrome.storage.local.get(['bookmarks'], (result) => {
+        const bookmarks = result.bookmarks || [];
+        bookmarkContainer.innerHTML = '';
+        bookmarks.forEach(bookmark => displayBookmark(bookmark));
+    });
 }
 
 // Function to save a bookmark to local storage
