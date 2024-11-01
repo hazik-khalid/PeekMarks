@@ -1,21 +1,9 @@
 
-document.addEventListener('DOMContentLoaded', () => {
-    const bookmarkContainer = document.getElementById('bookmark-container');
-    const saveButton = document.getElementById('save-bookmark');
-
     // Load bookmarks on popup open
     loadBookmarks();
 
     // Save the current page as a bookmark with thumbnail
-    saveButton.addEventListener('click', async () => {
-        const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-        const title = tab.title;
-        const url = tab.url;
-        const thumbnailUrl = `https://www.google.com/s2/favicons?sz=64&domain=${url}`; // Basic favicon thumbnail
 
-        const bookmark = { title, url, thumbnailUrl };
-        saveBookmark(bookmark);
-    });
 
     // Function to load bookmarks from storage and display them
     function loadBookmarks() {
@@ -27,13 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Function to save a bookmark to local storage
-    function saveBookmark(bookmark) {
-        chrome.storage.local.get(['bookmarks'], (result) => {
-            const bookmarks = result.bookmarks || [];
-            bookmarks.push(bookmark);
-            chrome.storage.local.set({ bookmarks }, loadBookmarks);
-        });
-    }
+
 
     // Function to display a bookmark
     function displayBookmark(bookmark) {
@@ -53,4 +35,4 @@ document.addEventListener('DOMContentLoaded', () => {
         bookmarkDiv.appendChild(title);
         bookmarkContainer.appendChild(bookmarkDiv);
     }
-});
+
