@@ -39,22 +39,39 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Function to display a bookmark
   function displayBookmark(bookmark) {
-    const bookmarkDiv = document.createElement("div");
-    bookmarkDiv.className = "bookmark";
+    const bookmarkDiv = document.createElement('div');
+    bookmarkDiv.className = 'bookmark';
 
-    const img = document.createElement("img");
+    const img = document.createElement('img');
     img.src = bookmark.thumbnailUrl;
     img.alt = `${bookmark.title} thumbnail`;
-    img.className = "thumbnail";
+    img.className = 'thumbnail';
 
-    const title = document.createElement("a"); // Create an anchor element instead of a paragraph
-    title.textContent = bookmark.title; // Set the text to the bookmark's title
-    title.href = bookmark.url; // Set the href attribute to the bookmark's URL
-    title.target = "_blank"; // Opens the link in a new tab
-    title.className = "title"; // Add a CSS class for styling
+    const title = document.createElement('a');
+    title.textContent = bookmark.title;
+    title.href = bookmark.url;
+    title.target = '_blank';
+    title.className = 'title';
+
+    const deleteButton = document.createElement('button');
+    deleteButton.textContent = 'Delete';
+    deleteButton.className = 'delete-button';
+    deleteButton.addEventListener('click', () => {
+        // Remove the bookmark from the DOM
+        bookmarkDiv.remove();
+
+        // Remove the bookmark from storage
+        chrome.storage.local.get(['bookmarks'], (result) => {
+            const bookmarks = result.bookmarks || [];
+            const updatedBookmarks = bookmarks.filter(b => b.url !== bookmark.url);
+            chrome.storage.local.set({ bookmarks: updatedBookmarks });
+        });
+    });
 
     bookmarkDiv.appendChild(img);
     bookmarkDiv.appendChild(title);
+    bookmarkDiv.appendChild(deleteButton);
     bookmarkContainer.appendChild(bookmarkDiv);
-  }
+}
+
 });
