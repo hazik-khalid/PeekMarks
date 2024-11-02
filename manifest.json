@@ -1,17 +1,25 @@
 {
-    "manifest_version": 3,
-    "name": "Visual Bookmark Manager",
-    "version": "1.0",
-    "description": "A visual bookmark manager with thumbnail previews and organization features.",
-    "permissions": ["bookmarks", "storage", "activeTab", "scripting"],
-    "action": {
-      "default_popup": "popup.html"
-    },
-    "applications": {
-        "gecko": {
-            "id": "your_extension_id@mozilla.org"
-        }
-    }
-
+  "manifest_version": 2,
+  "name": "Bookmark Manager",
+  "version": "1.0",
+  "description": "A visual bookmark manager with theme switching",
+  "permissions": ["storage", "activeTab", "tabs"],
+  "browser_action": {
+      "default_popup": "popup.html",
+      "default_icon": {
+          "16": "icons/icon-16.png",
+          "48": "icons/icon-48.png",
+          "128": "icons/icon-128.png"
+      }
+  },
+  "icons": {
+      "16": "icons/icon-16.png",
+      "48": "icons/icon-48.png",
+      "128": "icons/icon-128.png"
+  },
+  "applications": {
+      "gecko": {
+          "id": "your_extension_id@mozilla.org"
+      }
   }
-  
+}
