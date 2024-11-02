@@ -1,3 +1,5 @@
+
+const browserAPI = window.browser || window.chrome;
 document.addEventListener("DOMContentLoaded", () => {
   const bookmarkContainer = document.getElementById("bookmark-container");
   const saveButton = document.getElementById("save-bookmark");
