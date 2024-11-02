@@ -6,6 +6,11 @@
     "permissions": ["bookmarks", "storage", "activeTab", "scripting"],
     "action": {
       "default_popup": "popup.html"
+    },
+    "applications": {
+        "gecko": {
+            "id": "your_extension_id@mozilla.org"
+        }
     }
 
   }
