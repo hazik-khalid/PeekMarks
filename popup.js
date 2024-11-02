@@ -1,5 +1,5 @@
-
 const browserAPI = window.browser || window.chrome;
+
 document.addEventListener("DOMContentLoaded", () => {
   const bookmarkContainer = document.getElementById("bookmark-container");
   const saveButton = document.getElementById("save-bookmark");
@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Save the current page as a bookmark with thumbnail
   saveButton.addEventListener("click", async () => {
-    const [tab] = await chrome.tabs.query({
+    const [tab] = await browserAPI.tabs.query({
       active: true,
       currentWindow: true,
     });
@@ -25,34 +25,34 @@ document.addEventListener("DOMContentLoaded", () => {
   function loadBookmarks() {
     browserAPI.storage.local.get(['bookmarks'], (result) => {
       const bookmarks = result.bookmarks || [];
+      bookmarkContainer.innerHTML = ''; // Clear the container before loading
       bookmarks.forEach(bookmark => displayBookmark(bookmark));
-  });
+    });
   }
 
   // Function to save a bookmark to local storage
   function saveBookmark(bookmark) {
     // Retrieve existing bookmarks
     browserAPI.storage.local.get(["bookmarks"], (result) => {
+      if (browserAPI.runtime.lastError) {
+        console.error("Error retrieving bookmarks:", browserAPI.runtime.lastError);
+        return;
+      }
+      const bookmarks = result.bookmarks || [];
+      
+      // Add the new bookmark
+      bookmarks.push(bookmark);
+      
+      // Save updated bookmarks
+      browserAPI.storage.local.set({ bookmarks }, () => {
         if (browserAPI.runtime.lastError) {
-            console.error("Error retrieving bookmarks:", browserAPI.runtime.lastError);
-            return;
+          console.error("Error saving bookmarks:", browserAPI.runtime.lastError);
+          return;
         }
-        const bookmarks = result.bookmarks || [];
-        
-        // Add the new bookmark
-        bookmarks.push(bookmark);
-        
-        // Save updated bookmarks
-        browserAPI.storage.local.set({ bookmarks }, () => {
-            if (browserAPI.runtime.lastError) {
-                console.error("Error saving bookmarks:", browserAPI.runtime.lastError);
-                return;
-            }
-            loadBookmarks(); // Reload the bookmarks after saving
-        });
+        loadBookmarks(); // Reload the bookmarks after saving
+      });
     });
-}
-
+  }
 
   // Function to display a bookmark
   function displayBookmark(bookmark) {
@@ -63,6 +63,9 @@ document.addEventListener("DOMContentLoaded", () => {
     img.src = bookmark.thumbnailUrl;
     img.alt = `${bookmark.title} thumbnail`;
     img.className = "thumbnail";
+    img.onerror = () => {
+      img.src = "icons/def.png"; // Set a default thumbnail if loading fails
+    };
 
     const title = document.createElement("a");
     title.textContent = bookmark.title;
@@ -84,12 +87,16 @@ document.addEventListener("DOMContentLoaded", () => {
       bookmarkDiv.remove();
 
       // Remove the bookmark from storage
-      chrome.storage.local.get(["bookmarks"], (result) => {
+      browserAPI.storage.local.get(["bookmarks"], (result) => {
         const bookmarks = result.bookmarks || [];
         const updatedBookmarks = bookmarks.filter(
           (b) => b.url !== bookmark.url
         );
-        chrome.storage.local.set({ bookmarks: updatedBookmarks });
+        browserAPI.storage.local.set({ bookmarks: updatedBookmarks }, () => {
+          if (browserAPI.runtime.lastError) {
+            console.error("Error deleting bookmark:", browserAPI.runtime.lastError);
+          }
+        });
       });
     });
 
@@ -97,8 +104,5 @@ document.addEventListener("DOMContentLoaded", () => {
     bookmarkDiv.appendChild(title);
     bookmarkDiv.appendChild(deleteButton);
     bookmarkContainer.appendChild(bookmarkDiv);
-    img.onerror = () => {
-      img.src = "icons/def.png"; // Set a default thumbnail
-    };
   }
 });
