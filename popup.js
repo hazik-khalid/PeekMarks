@@ -91,7 +91,7 @@ document.addEventListener("DOMContentLoaded", () => {
     bookmarkDiv.appendChild(deleteButton);
     bookmarkContainer.appendChild(bookmarkDiv);
     img.onerror = () => {
-      img.src = "icon16.png"; // Set a default thumbnail
+      img.src = "icons/def.png"; // Set a default thumbnail
     };
   }
 });
