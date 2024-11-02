@@ -23,31 +23,36 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Function to load bookmarks from storage and display them
   function loadBookmarks() {
-    chrome.storage.local.get(["bookmarks"], (result) => {
+    browserAPI.storage.local.get(['bookmarks'], (result) => {
       const bookmarks = result.bookmarks || [];
-      bookmarkContainer.innerHTML = "";
-      bookmarks.forEach((bookmark) => displayBookmark(bookmark));
-    });
+      bookmarks.forEach(bookmark => displayBookmark(bookmark));
+  });
   }
 
   // Function to save a bookmark to local storage
   function saveBookmark(bookmark) {
-    chrome.storage.local.get(["bookmarks"], (result) => {
-      if (chrome.runtime.lastError) {
-        console.error("Error retrieving bookmarks:", chrome.runtime.lastError);
-        return;
-      }
-      const bookmarks = result.bookmarks || [];
-      bookmarks.push(bookmark);
-      chrome.storage.local.set({ bookmarks }, () => {
-        if (chrome.runtime.lastError) {
-          console.error("Error saving bookmarks:", chrome.runtime.lastError);
-          return;
+    // Retrieve existing bookmarks
+    browserAPI.storage.local.get(["bookmarks"], (result) => {
+        if (browserAPI.runtime.lastError) {
+            console.error("Error retrieving bookmarks:", browserAPI.runtime.lastError);
+            return;
         }
-        loadBookmarks();
-      });
+        const bookmarks = result.bookmarks || [];
+        
+        // Add the new bookmark
+        bookmarks.push(bookmark);
+        
+        // Save updated bookmarks
+        browserAPI.storage.local.set({ bookmarks }, () => {
+            if (browserAPI.runtime.lastError) {
+                console.error("Error saving bookmarks:", browserAPI.runtime.lastError);
+                return;
+            }
+            loadBookmarks(); // Reload the bookmarks after saving
+        });
     });
-  }
+}
+
 
   // Function to display a bookmark
   function displayBookmark(bookmark) {
