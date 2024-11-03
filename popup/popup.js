@@ -1,5 +1,6 @@
-const browserAPI = window.browser || window.chrome;
 
+
+const browserAPI = window.browser || window.chrome;
 document.addEventListener("DOMContentLoaded", () => {
   const bookmarkContainer = document.getElementById("bookmark-container");
   const saveButton = document.getElementById("save-bookmark");
@@ -105,4 +106,24 @@ document.addEventListener("DOMContentLoaded", () => {
     bookmarkDiv.appendChild(deleteButton);
     bookmarkContainer.appendChild(bookmarkDiv);
   }
+});
+
+
+// firebase
+
+document.getElementById("save-bookmark-button").addEventListener("click", () => {
+  const title = document.getElementById("title").value;
+  const url = document.getElementById("url").value;
+
+  // Send a message to the background script for saving the bookmark
+  chrome.runtime.sendMessage({ action: "saveBookmark", title, url }, (response) => {
+      const messageDiv = document.getElementById("response-message");
+      if (response.success) {
+          messageDiv.textContent = "Bookmark saved successfully!";
+          console.log("Bookmark saved:", response.data);
+      } else {
+          messageDiv.textContent = `Error: ${response.error}`;
+          console.error("Error saving bookmark:", response.error);
+      }
+  });
 });
