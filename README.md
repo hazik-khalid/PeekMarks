@@ -2,8 +2,6 @@
 
 **Effortlessly manage and organize bookmarks with visual previews, quick access, and multi-browser compatibility.**
 
-![Demo Screenshot](https://via.placeholder.com/800x600)
-
 ## Features
 - **Quick Bookmarking**: Save websites instantly with one click.
 - **Visual Previews**: Get thumbnail previews of your bookmarked pages.
@@ -28,8 +26,6 @@
 ## Development & Contributing
 To contribute:
 1. Clone the repository.
-2. Install dependencies: `npm install`.
-3. Run in development mode: `npm start`.
 
 To package for deployment:
 1. Ensure all assets are added and the `manifest.json` is updated.
