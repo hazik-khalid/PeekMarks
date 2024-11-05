@@ -38,5 +38,8 @@ Yes, it’s completely free.
 **Which browsers are compatible?**  
 Currently compatible with Chrome and Firefox.
 
+**Why Should?**  
+Currently compatible with Chrome and Firefox.
+
 ## License
 MIT License. See `LICENSE` file for details.
