@@ -1,6 +1,6 @@
 # PeekMarks
 
-**Effortlessly manage and organize bookmarks with visual previews, quick access, and multi. browser compatibility.**
+**Effortlessly manage and organize bookmarks with visual previews, quick access, and multi-browser compatibility.**
 
 ## Features
 - **Quick Bookmarking**: Save websites instantly with one click.
