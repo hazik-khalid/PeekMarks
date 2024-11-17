@@ -7,6 +7,12 @@ body {
     color: #f0f0f0; /* Light text color */
 }
 
+#bookmark-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
 
 
 
