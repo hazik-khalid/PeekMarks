@@ -88,4 +88,8 @@ body {
     transform: scale(1.2); /* Slightly enlarge the icon on hover */
 }
 
+/* Additional styling for links, if needed */
+a {
+    color: #1e90ff; /* Link color */
+}
 
