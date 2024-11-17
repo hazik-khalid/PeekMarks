@@ -84,6 +84,8 @@ body {
     fill: #f0f0f0; /* Light color for the delete icon */
 }
 
-
+.delete-button:hover .delete-icon {
+    transform: scale(1.2); /* Slightly enlarge the icon on hover */
+}
 
 
