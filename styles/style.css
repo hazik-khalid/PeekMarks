@@ -68,7 +68,13 @@ body {
     color: #f0f0f0; /* Ensure the title is visible on dark background */
 }
 
-
+/* Styling for the delete button */
+.delete-button {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
 
 
 
