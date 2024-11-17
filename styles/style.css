@@ -76,7 +76,13 @@ body {
     cursor: pointer;
 }
 
-
+/* Styling for the delete icon */
+.delete-icon {
+    width: 16px; /* Adjust size as needed */
+    height: 16px;
+    transition: transform 0.2s;
+    fill: #f0f0f0; /* Light color for the delete icon */
+}
 
 
 
