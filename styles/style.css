@@ -29,5 +29,10 @@ body {
     border-radius: 4px;
 }
 
+.title {
+    font-size: 14px;
+    color: #f0f0f0; /* Light color for the title */
+}
+
 
 
