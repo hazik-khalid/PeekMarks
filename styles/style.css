@@ -1,3 +1,12 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 10px;
+    width: 300px;
+    background-color: #1e1e1e; /* Dark background for the body */
+    color: #f0f0f0; /* Light text color */
+}
+
 
 
 
